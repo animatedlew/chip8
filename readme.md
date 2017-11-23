@@ -9,8 +9,10 @@
  - 64-byte stack
  - one delay timer, one 1-bit sound timer
  - programs start at 0x200
+ - big-endian instructions
+ - first byte of each instructin needs to be on even address
 
-# Op Codes
+# Op Codes - 36 different 16-bit instructions
 - 0nnn sys addr jump - NOT IMPLEMENTED
 - 00E0 - cls
 - 00EE - ret: set pc to top of stack, then -1 from stack ptr
