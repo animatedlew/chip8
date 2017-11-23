@@ -35,3 +35,10 @@ SPRITES = [[0xF0, 0x90, 0xF0, 0X90, 0XF0], # 8
  - Python v3
  - pygame
  - virtualenv
+ 
+ # Resources
+ - http://devernay.free.fr/hacks/chip8/C8TECH10.HTM
+ - https://en.wikipedia.org/wiki/CHIP-8
+ - https://web.archive.org/web/20130903145938/http://chip8.com/?page=84
+ - http://www.geocities.co.jp/Playtown-Yoyo/6130/chip8.htm
+ - https://johnearnest.github.io/Octo/
