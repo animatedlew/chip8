@@ -31,8 +31,7 @@ class CPU:
 
     # 8-bit timers decrease by 1 per tick of a 60Hz clock
     timers = {
-        'delay': 0,
-        # when timer is above zero, a tone will play
+        'delay': 0,        
         'sound': 0
     }
 
