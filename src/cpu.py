@@ -35,3 +35,13 @@ class CPU:
 
     # 8-bit stack pointer
     stack = [0] * 64 # 64-byte stack
+
+    def popPC(self):
+        "pops off values off stack"
+        self.R['PC'] = self.stack[self.R['SP']]
+        self.R['SP'] -= 1
+
+    def pushPC(self):
+        "pushes values onto the stack"
+        self.R['SP'] += 1
+        self.stack[self.R['SP']] = self.R['PC']

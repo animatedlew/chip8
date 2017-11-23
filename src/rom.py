@@ -37,7 +37,11 @@ for i, n in enumerate(SPRITES[6]):
 for i, n in enumerate(SPRITES[7]):
     ROM[i+35] = n
 
-# assert the ROM burn was successful
+# assert the burn was successful
 assert ROM[:8*5] == sum(SPRITES, [])
 
-ROM[0x200] = 1200 # JP to itself
+# test jumps
+ROM[0x200] = 0x1202 # JP
+ROM[0x202] = 0x1206 # JP
+ROM[0x204] = 0x1208 # JP
+ROM[0x206] = 0x1204 # JP
