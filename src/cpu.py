@@ -1,8 +1,11 @@
+"""CPU"""
+# pylint: disable=C0103
+
 class CPU:
     """This class holds registers, timers, and the stack"""
 
     # 16 8-bit registers
-    regs = {
+    R = {
         'V0': 0,
         'V1': 0,
         'V2': 0,
@@ -22,19 +25,13 @@ class CPU:
                  # also specifies if a pixel is to be drawn
 
         'I':  0, # 16-bit index register
-        'PC': 0, # 16-bit program counter
-        'SP': 0  # stack pointer
+        'PC': 0x200, # 16-bit program counter
+        'SP': 0, # stack pointer
+
+        # 8-bit timers decrease by 1 per tick of a 60Hz clock
+        'DT': 0, # delay
+        'ST': 0  # sound inactive when 0
     }
 
     # 8-bit stack pointer
     stack = [0] * 64 # 64-byte stack
-
-    # 8-bit timers decrease by 1 per tick of a 60Hz clock
-    timers = {
-        'DT': 0, # delay        
-        'ST': 0  # sound inactive when 0
-    }
-
-    def __init__(self):
-        # programs start at 0x200, identity: int(hex(512), 16)
-        pass

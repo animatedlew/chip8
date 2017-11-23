@@ -2,7 +2,7 @@
 
 ROM = [0] * 4096
 
-# define chip8 font
+# define chip-8 font
 SPRITES = [[0xF0, 0x90, 0xF0, 0X90, 0XF0], # 8
            [0xF0, 0x90, 0xF0, 0x10, 0xF0], # 9
            [0xF0, 0x90, 0x90, 0x90, 0xF0], # 0
@@ -17,22 +17,27 @@ for i, n in enumerate(SPRITES[0]):
     ROM[i] = n
 
 for i, n in enumerate(SPRITES[1]):
-    ROM[i+8] = n
+    ROM[i+5] = n
 
 for i, n in enumerate(SPRITES[2]):
-    ROM[i+16] = n
+    ROM[i+10] = n
 
 for i, n in enumerate(SPRITES[3]):
-    ROM[i+24] = n
+    ROM[i+15] = n
 
 for i, n in enumerate(SPRITES[4]):
-    ROM[i+32] = n
+    ROM[i+20] = n
 
 for i, n in enumerate(SPRITES[5]):
-    ROM[i+40] = n
+    ROM[i+25] = n
 
 for i, n in enumerate(SPRITES[6]):
-    ROM[i+48] = n
+    ROM[i+30] = n
 
 for i, n in enumerate(SPRITES[7]):
-    ROM[i+56] = n
+    ROM[i+35] = n
+
+# assert the ROM burn was successful
+assert ROM[:8*5] == sum(SPRITES, [])
+
+ROM[0x200] = 1200 # JP to itself
