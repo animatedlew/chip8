@@ -31,8 +31,8 @@ class CPU:
 
     # 8-bit timers decrease by 1 per tick of a 60Hz clock
     timers = {
-        'delay': 0,        
-        'sound': 0
+        'DT': 0, # delay        
+        'ST': 0  # sound inactive when 0
     }
 
     def __init__(self):
