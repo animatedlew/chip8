@@ -16,8 +16,13 @@
 - 0nnn sys addr jump - NOT IMPLEMENTED
 - 00E0 - cls
 - 00EE - ret: set pc to top of stack, then -1 from stack ptr
-- 1nnn - jp addr - set pc to nnn
-- 2nnn - call addr - inc stack ptr then puts current PC on top of the stack, PC is set to nnn
+- 1nnn - jp addr: set pc to nnn
+- 2nnn - call addr: inc stack ptr then puts current PC on top of the stack, PC is set to nnn
+- 3xkk - SE Vx, byte: skip next instruction if vx == byte
+- 4xkk - SNE Vx, byte: skip next instruction if vx != byte
+- 5xy0 - SE Vx, Vy: skip next instruction if vx == vy
+- 6xkk - LD Vx, byte: set vx = byte
+- 7xkk - ADD Vx, byte: add byte to vx
 - ...
 
 # Chip-8 Font
@@ -41,16 +46,43 @@ SPRITES = [[0xF0, 0x90, 0xF0, 0X90, 0XF0], # 8
 # Sample Run
 ```bash
 $ python3 src/chip8.py
-0x200: OP: 0x1202
-0x202: OP: 0x1206
-0x206: OP: 0x1204
-0x204: OP: 0x1208
-0x208: OP: 0x0
-0x209: OP: 0x0
-0x20a: OP: 0x0
-0x20b: OP: 0x0
-0x20c: OP: 0x0
-0x20d: OP: 0x0
+
+ addr:code
+-----------
+ 0200:630A
+ 0201:72FF
+ 0202:7305
+ 0203:0000
+ 0204:0000
+ 0205:0000
+ 0206:0000
+ 0207:0000
+ 0208:0000
+ 0209:0000
+
+ CPU Regs
+----------
+ V0: 0000
+ V1: 0000
+ V2: 00FF
+ V3: 000F
+ V4: 0000
+ V5: 0000
+ V6: 0000
+ V7: 0000
+ V8: 0000
+ V9: 0000
+ VA: 0000
+ VB: 0000
+ VC: 0000
+ VD: 0000
+ VE: 0000
+ VF: 0000
+  I: 0000
+ PC: 020A
+ SP: 0000
+ DT: 0000
+ ST: 0000
  ```
  
  # Resources

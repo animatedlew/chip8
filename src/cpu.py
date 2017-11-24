@@ -45,3 +45,9 @@ class CPU:
         "pushes values onto the stack"
         self.R['SP'] += 1
         self.stack[self.R['SP']] = self.R['PC']
+
+    def __str__(self):
+        o = '\n CPU Regs\n----------\n'
+        for n in self.R:
+            o += ' %2s: %04X\n' % (n, self.R[n])
+        return o
