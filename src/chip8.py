@@ -69,6 +69,35 @@ class Chip8:
             elif group == 7: # ADD Vx, kk
                 # decode 7xkk - set Vx = Vx + kk.
                 cpu.R[vx] += lsb
+
+            elif group == 8:
+                kind = op & 0x000F
+
+                if (kind == 0):     # 8xy0 - LD Vx, Vy
+                    cpu.R[vx] = cpu.R[vy]
+                elif (kind == 1):   # 8xy1 - OR Vx, Vy
+                    cpu.R[vx] |= cpu.R[vy]
+                elif (kind == 2):   # 8xy2 - AND Vx, Vy
+                    cpu.R[vx] &= cpu.R[vy]
+                elif (kind == 3):   # 8xy3 - XOR Vx, Vy
+                    cpu.R[vx] ^= cpu.R[vy]
+                elif (kind == 4):   # 8xy4 - ADD Vx, Vy
+                    cpu.R[vx] += cpu.R[vy]
+                    cpu.R['VF'] = 1 if cpu.R[vx] > 0xFF else 0
+                    cpu.R[vx] %= 0xFF
+                elif (kind == 5):   # 8xy5 - SUB Vx, Vy
+                    cpu.R['VF'] = 1 if cpu.R[vx] > cpu.R[vy] else 0
+                    cpu.R[vx] -= cpu.R[vy]
+                elif (kind == 6):   # 8xy6 - SHR Vx {, Vy}
+                    cpu.R['VF'] = 1 if cpu.R[vx] & 0x01 == 1 else 0
+                    cpu.R[vx] >>= 1
+                elif (kind == 7):   # 8xy7 - SUBN Vx, Vy
+                    cpu.R['VF'] = 1 if cpu.R[vy] > cpu.R[vx] else 0
+                    cpu.R[vx] = cpu.R[vy] - cpu.R[vx]
+                elif (kind == 0xE): # 8xyE - SHL Vx {, Vy}
+                    cpu.R['VF'] = 1 if cpu.R[vx] & 0x80 == 1 else 0
+                    cpu.R[vx] *= 2
+
             else:
                 return op
 
