@@ -63,6 +63,11 @@ SPRITES = [0xF0, 0x90, 0x90, 0x90, 0xF0, # 0
  - Python v3
  - pygame
  - virtualenv
+ 
+# Setup
+- virtualenv -r python3
+- `. ./bin/activate`
+- pip install -r requirements.txt
 
 # Sample Run
 ```bash
