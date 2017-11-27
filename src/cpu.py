@@ -6,6 +6,8 @@ class CPU:
 
     # 16 8-bit registers
     R = {
+        'PC': 0x200, # 16-bit program counter
+
         'V0': 0,
         'V1': 0,
         'V2': 0,
@@ -25,7 +27,6 @@ class CPU:
                  # also specifies if a pixel is to be drawn
 
         'I':  0, # 16-bit index register
-        'PC': 0x200, # 16-bit program counter
         'SP': 0, # stack pointer
 
         # 8-bit timers decrease by 1 per tick of a 60Hz clock
@@ -48,6 +49,10 @@ class CPU:
 
     def __str__(self):
         o = '\n CPU Regs\n----------\n'
+        mod = 0
         for n in self.R:
-            o += ' %2s: %04X\n' % (n, self.R[n])
+            o += ' %2s: %04X %s' % (n, self.R[n], '' if mod else '\n' )
+            mod += 1
+            mod %= 4
+        o += '\n'
         return o
