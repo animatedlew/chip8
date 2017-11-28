@@ -35,7 +35,7 @@
 - Annn - LD I, addr
 - Bnnn - JP V0, addr
 - Cxkk - RND Vx, kk
-- Dxyn - DRW Vx, Vy, nibble
+- Dxyn - DRW Vx, Vy, size
 - ...
 
 # Chip-8 Font

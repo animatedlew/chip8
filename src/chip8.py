@@ -25,7 +25,7 @@ class Chip8:
         """programs start at 0x200, identity: int(hex(512), 16)"""
         print('\n addr:code\n-----------')
         # while True:
-        for _ in range(10): # testing
+        for _ in range(16): # testing
 
             self.quit()
 
@@ -127,8 +127,8 @@ class Chip8:
             elif group == 0xC: # Cxkk - RND Vx, kk
                 cpu.R[vx] = random.randint(0, 255) & lsb
 
-            elif group == 0xD: # Dxyn - DRW Vx, Vy, n
-                n = op & 0x000F
+            elif group == 0xD: # Dxyn - DRW Vx, Vy, size
+                n = op & 0x000F # size of sprite
                 '''
                 Display n-byte sprite starting at memory
                 location I at (Vx, Vy), set VF = collision.
@@ -144,12 +144,21 @@ class Chip8:
                 it wraps around to the opposite side of the screen.
                 '''
                 sprite = [ROM[cpu.R['I'] + n] for n in range(n)]
+
+                # TODO: make sure these coords are mod 0x10
                 x = cpu.R[vx]
                 y = cpu.R[vy]
+
+                col = x >> 3       # div by 8
+                col_x = col << 3   # mult by 8
+                offset = x - col_x # find column offset
+
                 for i in range(n):
-                    # TODO: this currently banks the sprite to byte aligned columns.
-                    # update this to allow drawing across column borders
-                    video.FRAMEBUFFER[(y + i) * 0x10 + (x // 8)] = sprite[i]
+                    # offset sprite onto current column
+                    video.FRAMEBUFFER[(y + i) * 0x10 + col] = sprite[i] >> offset
+                    # if we have an offset, slice the sprite onto next column
+                    if bool(8 - offset) and col <= 0x10:
+                      video.FRAMEBUFFER[(y + i) * 0x10 + col + 1] = (sprite[i] << (8 - offset) & 0xFF)
                 print(list(map(hex, sprite)))
             else:
                 return op
@@ -187,7 +196,7 @@ class Chip8:
                     if isSet:
                         # TODO: add VF flag collision logic @ sprite level
                         current_pixel = pixels[(pos * 8) + col][row]
-                        pixel = ((0xFF if isSet else 0x00) ^ current_pixel) & 0xFF
+                        pixel = ((0xFF if isSet else 0x00) ^ (current_pixel & 0xFF) ) & 0xFF
                         pixels[(pos * 8) + col][row] = (pixel, pixel, pixel)
             o += '\n'
         print('-----------------------------------------------')

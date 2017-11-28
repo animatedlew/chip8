@@ -60,7 +60,11 @@ ROM[0x200] = 0xA000 # point to address 0, sprite 0
 ROM[0x201] = 0x6000 # ld v0 = 0
 ROM[0x202] = 0x6100 # ld v1 = 0
 ROM[0x203] = 0xD015 # draw a 5-byte sprite at (0, 0)
-ROM[0x204] = 0xA014 # point to address 0xA, sprite A
+ROM[0x204] = 0xA014 # point to address 0x14, sprite 4
 ROM[0x205] = 0x6008 # ld v0 = 8
-ROM[0x206] = 0x6105 # ld v1 = 5
-ROM[0x207] = 0xD015 # draw a 5-byte sprite at (1, 1)
+ROM[0x206] = 0x6106 # ld v1 = 6
+ROM[0x207] = 0xD015 # draw a 5-byte sprite at (8, 5)
+ROM[0x208] = 0xA00F # sprite 3
+ROM[0x209] = 0x6008 # ld v0 = 8
+ROM[0x20A] = 0x6100 # ld v1 = 0
+ROM[0x20B] = 0xD015 # draw a 5-byte sprite at (12, 0)
